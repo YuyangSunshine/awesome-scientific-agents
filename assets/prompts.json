@@ -1,0 +1,16 @@
+{
+  "tool": "Built-in image_gen",
+  "date": "2026-10-12",
+  "assets": [
+    {
+      "key": "logo",
+      "transparent_background": true,
+      "prompt": "Use case: logo-brand. Asset type: logo for the GitHub research review Awesome Scientific Agents. Create a polished square symbol, no words, no letters. A single coherent emblem combining an open scientific book and an elegant laboratory flask, with a small connected-node orbit suggesting intelligent agents and one restrained verification-check motif. Friendly yet scholarly editorial vector-like illustration, clean strong silhouette, flat navy and teal shapes with a restrained warm coral accent, careful negative space, readable at small sizes. Not a mascot face, no generic gear, no watermark, no gradients, no surrounding decorative scene. Truly transparent background. Center the emblem with generous padding. This is a new original mark for a review connecting scientific agency, evidence verification and continual learning."
+    },
+    {
+      "key": "overview",
+      "transparent_background": false,
+      "prompt": "Use case: scientific-educational. Asset type: original wide landscape overview illustration for a GitHub review, approximately 3:2 landscape. Primary request: Explain the review From Research Automation to Verifiable Scientific Discovery through a clear delightful scientific research ecosystem illustration. Warm ivory background, navy outlines, teal and muted coral accents, crisp editorial isometric mini-scenes, sophisticated friendly style, ample whitespace and large accurate English typography. Title exactly 'From Automation to Verifiable Discovery'. Upper/main band: five connected mini-scenes left to right, each numbered and labeled exactly '1. Question', '2. Hypothesis', '3. Experiment', '4. Evidence', '5. Knowledge'. Scenes show a scientist and small AI assistants reading papers, proposing a hypothesis, performing a robotic laboratory experiment, checking measurements and contrasting evidence, updating an organized scientific knowledge map. Connect them with subtle arrows; a clear feedback arc from Knowledge back to Question labeled exactly 'Scientific knowledge update'. Lower band three equally sized elegant panels, exact headings 'Agency', 'Verification', 'Learning', with respective short captions 'Who decides?', 'What supports the claim?', 'What improves over time?'. Agency icon human supervising agent decisions; Verification icon evidence and magnifying glass; Learning icon model update compared with frozen model, suggesting measured capability improvement rather than automatic progress. Caption under Learning exactly 'Test capability gains separately'. Do not depict a fully autonomous system with no human responsibility. Do not imply that accumulating knowledge proves agent self-improvement. Do not add statistical results, bar chart values, manuscript IDs, references, institution logos, extra labels or watermark. It must be beautiful and legible as a single README introduction figure. The attached user examples are mood inspiration only: do not copy their composition or text. Generate a new original illustration."
+    }
+  ]
+}

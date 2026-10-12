@@ -2,6 +2,7 @@
 import csv
 import json
 import re
+import struct
 from collections import Counter
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
@@ -47,10 +48,31 @@ for path in ROOT.rglob('*.md'):
         continue
     content = path.read_text(encoding='utf-8')
     assert not re.search(r'\b[A-Z]:[\\/]', content), f'Local absolute path in {path.name}'
-    for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)', content):
-        if target.startswith(('http://', 'https://', '#', 'mailto:')):
+    anchors = set(re.findall(r'<a id="([^"]+)"', content))
+    targets = re.findall(r'\[[^\]]*\]\(([^)]+)\)', content)
+    targets += re.findall(r'(?:src|href)="([^"]+)"', content)
+    for target in targets:
+        if target.startswith('#'):
+            assert target[1:] in anchors, f'Broken section anchor: {path.name}: {target}'
+            continue
+        if target.startswith(('http://', 'https://', 'mailto:')):
             continue
         local = unquote(target.split('#')[0].strip('<>'))
         assert (path.parent / local).exists(), f'Broken local link: {path.name}: {target}'
 assert not list(ROOT.rglob('*.pdf')), 'Unexpected paper binary in repository'
-print(f'OK: {len(records)} unique records; matching BibTeX and CSV; local Markdown links valid.')
+readme = (ROOT / 'README.md').read_text(encoding='utf-8')
+assert not re.search(r'\bM\d{4}\b', readme), 'Internal paper IDs displayed in README'
+assert not list((ROOT / 'papers').glob('*.md')), 'Paper lists must live in the homepage'
+for r in records:
+    title = r['title'].replace('|', '\\|').replace('[', '\\[').replace(']', '\\]')
+    assert f'**{title}**' in readme, f"Missing homepage entry: {r['id']}"
+from render_readme import TOPICS
+for _, slug, _, _, _ in TOPICS:
+    section = readme.split(f'<a id="{slug}"></a>', 1)[1].split('\n---\n', 1)[0]
+    years = [int(y) for y in re.findall(r'^### (\d{4})$', section, re.M)]
+    assert years == sorted(set(years), reverse=True), f'Incorrect year grouping: {slug}'
+for name in ['logo.png', 'review-overview.png']:
+    asset = (ROOT / 'assets' / name).read_bytes()
+    assert asset[:8] == b'\x89PNG\r\n\x1a\n', f'Invalid PNG: {name}'
+    assert min(struct.unpack('>II', asset[16:24])) >= 256
+print(f'OK: {len(records)} unique records; all papers on the homepage; years, anchors, assets, CSV and BibTeX valid.')

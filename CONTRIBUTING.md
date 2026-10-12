@@ -15,9 +15,9 @@ Provide a primary source: publisher DOI, official conference proceedings, or a r
 3. Verify published or accepted status against an official source. An unverified acceptance claim remains `PUBLICATION_PENDING_VERIFICATION`; an unaccepted preprint uses `PREPRINT_CONTEMPORANEOUS`. Publication status and claim validity are separate facts.
 4. Link versions of the same work within a record; keep genuine follow-up studies and corrections separate. Mention related IDs in the PR. Read A-Lab `M0026` with correction `M0027`.
 5. Add or update the matching `references.bib` entry with the same ID. Do not add local file paths or article binaries. Use source landing pages for access.
-6. Run `python scripts/build_catalog.py` and `python scripts/validate.py`. Commit the updated generated Markdown and CSV. Topic lists and English README are generated; update their generator when changing shared prose.
+6. Run `python scripts/build_catalog.py` and `python scripts/validate.py`. Commit the updated README and CSV. All paper lists are generated directly in the homepage; update `scripts/render_readme.py` when changing shared prose. Keep lists organized by topic and year, with newest years first; public entries show titles, venues, and paper links.
 
-`source_fulltext_available` records access in the source library, not whether a visitor can download a paper. For community additions without a source-library copy, use `false` and `pdf_version: "unavailable"`. Snapshot counts describe the initial import; current counts in the English README are regenerated. The Chinese introduction describes that initial snapshot explicitly.
+`source_fulltext_available` records access in the source library, not whether a visitor can download a paper. For community additions without a source-library copy, use `false` and `pdf_version: "unavailable"`. Snapshot counts describe the initial import; current catalog counts in the README are regenerated. Stable IDs are used internally for data and BibTeX matching, not displayed in the reading lists.
 
 ## Evidence notes and errors
 
