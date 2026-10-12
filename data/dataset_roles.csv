@@ -1,0 +1,5 @@
+﻿family,examples,source_ids,unit,role,conditions
+Task and reference-answer corpora,SciCode; ChemBench; MaCBench,M0077;M0082;M0083,Question/problem or question-image pair,Evaluate code or interpretation,"Freeze answers, split and scorer; avoid training/test contamination"
+Paper-derived workflow packages,ScienceAgentBench; DiscoveryBench; PaperBench,M0075;M0076;M0079,"Dataset + goal, or paper + rubric",Evaluate a research workflow,"Separate papers, datasets and tasks; preserve provenance and evaluator version"
+Empirical response landscapes,GB1 / TrpB landscapes used by ALDE; reaction data; Olympus datasets,M0053;M0051;M0057,Sequence/condition paired with measured response,Fit surrogates and replay experiment selection,Endpoint-specific labels; structured splits; historical replay is not a new wet experiment
+Simulators and fitted emulators,DiscoveryWorld; ScienceWorld; Olympus emulators,M0078;M0084;M0057,Environment state and action-conditioned response,Evaluate sequential decisions under budget,Freeze transition rules and noise; test simulator-to-reality transfer separately

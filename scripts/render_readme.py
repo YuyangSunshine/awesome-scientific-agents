@@ -122,6 +122,54 @@ This collection brings together research on **scientific agency, verifiable evid
     for code, slug, icon, title, description in TOPICS:
         selected = [r for r in records if code in r['wp_membership'].split(';')]
         md += f'<a id="{slug}"></a>\n## {icon} {title}\n\n{description}\n\n'
+        if code == 'WP5':
+            md += '''<details>
+<summary>🖼️ Review figure: testing whether experience improves the next study</summary>
+
+<img src="assets/fig05-learning-validation.png" alt="Learning validation: compare frozen and updated capabilities on independent later tasks under matched conditions" width="100%">
+
+*Figure 5 from the working review. Distinguish data/memory, scientific beliefs, predictive models, decision policies and reusable capabilities. Test a versioned update on later independent tasks against a frozen baseline with matched model, data access, task selection and budgets; assess performance, cost, calibration and retention. This is a proposed evaluation design, not a measured learning effect.*
+
+</details>
+
+'''
+        if code == 'WP6':
+            md += '''### 🗺️ Benchmark and Dataset Resource Map
+
+The expanded resource review organizes evaluation around four families: **component competence**, **research trajectories and replication**, **experimental decisions**, and **interactive environments**. Scientific data can fit a model, ground a claim, emulate a response, or evaluate capability; these roles require different provenance, splits and independence conditions.
+
+<img src="assets/fig07-benchmarks-datasets.png" alt="Benchmark and dataset map: component competence, research trajectories, experimental decisions, interactive environments and four roles of scientific data" width="100%">
+
+*Figure 7 from the working review. Named resources illustrate distinct evaluation constructs; screen traces and equipment are schematic. A benchmark score supports its evaluated construct rather than a universal measure of scientific discovery.*
+
+The source resource review (2026-10-12) includes **11 resources: nine marked published and two contemporaneous preprints**, plus **four dataset families**. These resources link to papers already in this collection; they do not add 11 new unique publications. [Resource ledger](data/benchmark_resources.csv) · [Dataset roles](data/dataset_roles.csv) · [Review scope](data/resource_review_scope.json).
+
+| Resource | Paper | Official resource | Interpretation boundary |
+| --- | --- | --- | --- |
+'''
+            resources = list(csv.DictReader((ROOT / 'data/benchmark_resources.csv').open(encoding='utf-8-sig')))
+            for resource in resources:
+                paper = by_id[resource['source_id']]
+                label = resource['resource'] + (' 📝' if paper['publication_status'] == 'PREPRINT_CONTEMPORANEOUS' else '')
+                md += f"| {label} | [Paper]({url(paper)}) | [Official resource]({resource['official_resource_url']}) | {escape(resource['scientific_boundary'])} |\n"
+            md += '''
+**Version-aware reading.** Keep revised splits, evaluator releases and original paper scales separate. For ScienceAgentBench, retain the verified-split distinction; for PaperBench, distinguish full replication from Code-Dev/code-only evaluation; for BixBench, record the question-set revision. For Olympus and ALDE, distinguish measured landscapes, fitted emulators, historical replay and new wet-lab experiments. Version details are inherited from the source resource ledger; this repository reports no new benchmark execution or performance ranking.
+
+<details>
+<summary>🗃️ Four dataset families and their use conditions</summary>
+
+| Dataset family | Role | Conditions |
+| --- | --- | --- |
+'''
+            datasets = list(csv.DictReader((ROOT / 'data/dataset_roles.csv').open(encoding='utf-8-sig')))
+            for dataset in datasets:
+                md += f"| {escape(dataset['family'])} | {escape(dataset['role'])} | {escape(dataset['conditions'])} |\n"
+            md += '''
+</details>
+
+### 📚 Papers by Year
+
+'''
         for year in sorted({int(r['year']) for r in selected}, reverse=True):
             md += f'### {year}\n\n'
             md += '\n'.join(entry(r) for r in sorted(selected, key=lambda x: x['title'].casefold()) if int(r['year']) == year) + '\n\n'
@@ -132,7 +180,7 @@ This collection brings together research on **scientific agency, verifiable evid
 
 This is a targeted, curated working collection exported from our review library. It is open to expansion and does not claim exhaustive field coverage. Publication status and version metadata preserve the source-catalog assessment; inclusion does not establish a scientific claim or independent reproduction. Continual-learning entries include methodological background, and benchmark entries span distinct evaluation tasks.
 
-The initial source snapshot contained {snapshot['records']} unique records; its working main text cited {len(snapshot['manuscript_cited_ids'])} of them. This repository can continue growing as the manuscript selects the references needed for its argument. Journal reference requirements continue to apply to the manuscript.
+The source snapshot contains {snapshot['records']} unique records; its working main text cited {len(snapshot['manuscript_cited_ids'])} of them. This repository can continue growing as the manuscript selects the references needed for its argument. Journal reference requirements continue to apply to the manuscript.
 
 Papers are accessed through their original publication or preprint pages. Related versions of a work should be connected; genuine follow-up studies and corrections remain distinct. Read the A-Lab article alongside its author correction rather than carrying forward an earlier result without its update.
 
@@ -180,6 +228,8 @@ Cite the original paper for a research claim. To cite the collection itself, use
 The reading-list presentation draws inspiration from [Awesome-Agent-Papers](https://github.com/luo-junyu/Awesome-Agent-Papers), [Awesome-LLM-Scientific-Discovery](https://github.com/HKUST-KnowComp/Awesome-LLM-Scientific-Discovery), and [awesome-llm-agents](https://github.com/kaushikb11/awesome-llm-agents). The introduction, organization around our review questions, logo, and overview illustration were created for this collection.
 
 Original repository content and curation: [CC BY 4.0](LICENSE-CONTENT.md). Maintenance scripts: [MIT](LICENSE). Linked papers retain their original licenses. The two illustrations were generated with OpenAI's built-in image generation tool; the [prompts](assets/prompts.json) document their intended design. The overview is conceptual and reports no experimental findings.
+
+Figures 5 and 7 are reproduced from the working review's existing figure collection. Their [source manifest](assets/review-figures.json) preserves the source-paper anchors, original filenames, and qualitative interpretation. They illustrate evaluation designs and resource constructs rather than report new experimental results.
 
 [↑ Back to contents](#contents)
 '''

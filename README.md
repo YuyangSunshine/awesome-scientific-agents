@@ -268,9 +268,18 @@ Active learning, Bayesian optimization, and data-efficient experiment selection.
 
 Scientific knowledge updates, memory, model and policy adaptation, and transferable capability improvement. Relevant background methods are included; their presence does not establish scientific-agent learning.
 
+<details>
+<summary>🖼️ Review figure: testing whether experience improves the next study</summary>
+
+<img src="assets/fig05-learning-validation.png" alt="Learning validation: compare frozen and updated capabilities on independent later tasks under matched conditions" width="100%">
+
+*Figure 5 from the working review. Distinguish data/memory, scientific beliefs, predictive models, decision policies and reusable capabilities. Test a versioned update on later independent tasks against a frozen baseline with matched model, data access, task selection and budgets; assess performance, cost, calibration and retention. This is a proposed evaluation design, not a measured learning effect.*
+
+</details>
+
 ### 2026
 
-- **A Survey of Self-Evolving Agents: What, When, How, and Where to Evolve on the Path to Artificial Super Intelligence** · `TMLR` · [Paper](https://openreview.net/pdf)
+- **A Survey of Self-Evolving Agents: What, When, How, and Where to Evolve on the Path to Artificial Super Intelligence** · `TMLR` · [Paper](https://openreview.net/pdf?id=CTr3bovS5F)
 - **Accelerating scientific discovery with Co-Scientist** · `Nature` · [Paper](https://doi.org/10.1038/s41586-026-10644-y)
 - **CoPeP: Benchmarking Continual Pretraining for Protein Language Models** · `arXiv` · [Paper](https://arxiv.org/abs/2603.00253) 📝 *Preprint*
 - **Evaluating Memory Condensation Strategies for Coding Agents in Data-Driven Scientific Discovery** · `arXiv` · [Paper](https://arxiv.org/abs/2605.18854) 📝 *Preprint*
@@ -303,6 +312,46 @@ Scientific knowledge updates, memory, model and policy adaptation, and transfera
 ## 📊 Benchmarks and Scientific Evaluation
 
 Evaluation of scientific knowledge, reasoning, tool use, and research workflows. Benchmarks measure different constructs and should be interpreted with their task definitions and scoring conditions.
+
+### 🗺️ Benchmark and Dataset Resource Map
+
+The expanded resource review organizes evaluation around four families: **component competence**, **research trajectories and replication**, **experimental decisions**, and **interactive environments**. Scientific data can fit a model, ground a claim, emulate a response, or evaluate capability; these roles require different provenance, splits and independence conditions.
+
+<img src="assets/fig07-benchmarks-datasets.png" alt="Benchmark and dataset map: component competence, research trajectories, experimental decisions, interactive environments and four roles of scientific data" width="100%">
+
+*Figure 7 from the working review. Named resources illustrate distinct evaluation constructs; screen traces and equipment are schematic. A benchmark score supports its evaluated construct rather than a universal measure of scientific discovery.*
+
+The source resource review (2026-10-12) includes **11 resources: nine marked published and two contemporaneous preprints**, plus **four dataset families**. These resources link to papers already in this collection; they do not add 11 new unique publications. [Resource ledger](data/benchmark_resources.csv) · [Dataset roles](data/dataset_roles.csv) · [Review scope](data/resource_review_scope.json).
+
+| Resource | Paper | Official resource | Interpretation boundary |
+| --- | --- | --- | --- |
+| SciCode | [Paper](https://proceedings.neurips.cc/paper_files/paper/2024/file/36850592258c8c41cecdaa3dea5ff7de-Paper-Datasets_and_Benchmarks_Track.pdf) | [Official resource](https://github.com/scicode-bench/SciCode) | Correct tested computation, not an empirical mechanism |
+| ScienceAgentBench | [Paper](https://proceedings.iclr.cc/paper_files/paper/2025/file/f12b4df26344f3be803c06b555252efe-Paper-Conference.pdf) | [Official resource](https://github.com/OSU-NLP-Group/ScienceAgentBench) | Task execution, not open-ended discovery or wet-lab validity |
+| DiscoveryBench | [Paper](https://proceedings.iclr.cc/paper_files/paper/2025/file/0d70af566e69f1dfb687791ecf955e28-Paper-Conference.pdf) | [Official resource](https://github.com/allenai/discoverybench) | Dataset-grounded findings, not causal identification by default |
+| PaperBench | [Paper](https://proceedings.mlr.press/v267/starace25a.html) | [Official resource](https://github.com/openai/frontier-evals/tree/main/project/paperbench) | Replication proficiency, not novel discovery |
+| DiscoveryWorld | [Paper](https://proceedings.neurips.cc/paper_files/paper/2024/file/13836f251823945316ae067350a5c366-Paper-Datasets_and_Benchmarks_Track.pdf) | [Official resource](https://github.com/allenai/discoveryworld) | Discovery in a simulated world, not physical transfer |
+| ScienceWorld | [Paper](https://doi.org/10.18653/v1/2022.emnlp-main.775) | [Official resource](https://github.com/allenai/ScienceWorld) | Interactive science skills, not open scientific novelty |
+| ChemBench | [Paper](https://doi.org/10.1038/s41557-025-01815-x) | [Official resource](https://github.com/lamalab-org/chembench) | Chemical competence, not autonomous laboratory execution |
+| MaCBench | [Paper](https://doi.org/10.1038/s43588-025-00836-3) | [Official resource](https://github.com/lamalab-org/macbench) | Interpreting an experiment image is not physically performing it |
+| Olympus | [Paper](https://doi.org/10.1088/2632-2153/abedc8) | [Official resource](https://github.com/the-matter-lab/olympus) | Search efficiency on a response surface, not full scientific agency |
+| LAB-Bench 📝 | [Paper](https://arxiv.org/abs/2407.10362) | [Official resource](https://huggingface.co/datasets/futurehouse/lab-bench) | Research knowledge and interpretation, not wet-lab validation |
+| BixBench 📝 | [Paper](https://arxiv.org/abs/2503.00096) | [Official resource](https://github.com/Future-House/BixBench) | Analytical reasoning; score changes may reflect corpus revision |
+
+**Version-aware reading.** Keep revised splits, evaluator releases and original paper scales separate. For ScienceAgentBench, retain the verified-split distinction; for PaperBench, distinguish full replication from Code-Dev/code-only evaluation; for BixBench, record the question-set revision. For Olympus and ALDE, distinguish measured landscapes, fitted emulators, historical replay and new wet-lab experiments. Version details are inherited from the source resource ledger; this repository reports no new benchmark execution or performance ranking.
+
+<details>
+<summary>🗃️ Four dataset families and their use conditions</summary>
+
+| Dataset family | Role | Conditions |
+| --- | --- | --- |
+| Task and reference-answer corpora | Evaluate code or interpretation | Freeze answers, split and scorer; avoid training/test contamination |
+| Paper-derived workflow packages | Evaluate a research workflow | Separate papers, datasets and tasks; preserve provenance and evaluator version |
+| Empirical response landscapes | Fit surrogates and replay experiment selection | Endpoint-specific labels; structured splits; historical replay is not a new wet experiment |
+| Simulators and fitted emulators | Evaluate sequential decisions under budget | Freeze transition rules and noise; test simulator-to-reality transfer separately |
+
+</details>
+
+### 📚 Papers by Year
 
 ### 2026
 
@@ -342,7 +391,7 @@ Evaluation of scientific knowledge, reasoning, tool use, and research workflows.
 
 This is a targeted, curated working collection exported from our review library. It is open to expansion and does not claim exhaustive field coverage. Publication status and version metadata preserve the source-catalog assessment; inclusion does not establish a scientific claim or independent reproduction. Continual-learning entries include methodological background, and benchmark entries span distinct evaluation tasks.
 
-The initial source snapshot contained 90 unique records; its working main text cited 52 of them. This repository can continue growing as the manuscript selects the references needed for its argument. Journal reference requirements continue to apply to the manuscript.
+The source snapshot contains 90 unique records; its working main text cited 56 of them. This repository can continue growing as the manuscript selects the references needed for its argument. Journal reference requirements continue to apply to the manuscript.
 
 Papers are accessed through their original publication or preprint pages. Related versions of a work should be connected; genuine follow-up studies and corrections remain distinct. Read the A-Lab article alongside its author correction rather than carrying forward an earlier result without its update.
 
@@ -398,5 +447,7 @@ Cite the original paper for a research claim. To cite the collection itself, use
 The reading-list presentation draws inspiration from [Awesome-Agent-Papers](https://github.com/luo-junyu/Awesome-Agent-Papers), [Awesome-LLM-Scientific-Discovery](https://github.com/HKUST-KnowComp/Awesome-LLM-Scientific-Discovery), and [awesome-llm-agents](https://github.com/kaushikb11/awesome-llm-agents). The introduction, organization around our review questions, logo, and overview illustration were created for this collection.
 
 Original repository content and curation: [CC BY 4.0](LICENSE-CONTENT.md). Maintenance scripts: [MIT](LICENSE). Linked papers retain their original licenses. The two illustrations were generated with OpenAI's built-in image generation tool; the [prompts](assets/prompts.json) document their intended design. The overview is conceptual and reports no experimental findings.
+
+Figures 5 and 7 are reproduced from the working review's existing figure collection. Their [source manifest](assets/review-figures.json) preserves the source-paper anchors, original filenames, and qualitative interpretation. They illustrate evaluation designs and resource constructs rather than report new experimental results.
 
 [↑ Back to contents](#contents)

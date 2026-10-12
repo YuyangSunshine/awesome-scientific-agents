@@ -5,7 +5,7 @@ import json
 import re
 from collections import Counter
 from pathlib import Path
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 CATEGORIES = {
@@ -33,7 +33,11 @@ def clean_url(url):
     parts = urlsplit(url)
     if parts.scheme not in ('https', 'http') or not parts.netloc:
         raise ValueError(f'Invalid public URL: {url}')
-    return urlunsplit((parts.scheme, parts.netloc, parts.path, '', ''))
+    # OpenReview IDs and other functional parameters identify the source.
+    query = [(key, value) for key, value in parse_qsl(parts.query, keep_blank_values=True)
+             if not key.startswith('utm_') and key not in {'error', 'cookies_not_supported'}
+             and not (parts.netloc.endswith('nature.com') and key == 'code')]
+    return urlunsplit((parts.scheme, parts.netloc, parts.path, urlencode(query), parts.fragment))
 
 def import_library(source):
     raw = list(csv.DictReader((source / 'master_catalog.csv').open(encoding='utf-8-sig')))

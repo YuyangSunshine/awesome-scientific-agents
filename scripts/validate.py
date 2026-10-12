@@ -71,7 +71,23 @@ for _, slug, _, _, _ in TOPICS:
     section = readme.split(f'<a id="{slug}"></a>', 1)[1].split('\n---\n', 1)[0]
     years = [int(y) for y in re.findall(r'^### (\d{4})$', section, re.M)]
     assert years == sorted(set(years), reverse=True), f'Incorrect year grouping: {slug}'
-for name in ['logo.png', 'review-overview-v2.png']:
+resources = list(csv.DictReader((ROOT / 'data/benchmark_resources.csv').open(encoding='utf-8-sig')))
+datasets = list(csv.DictReader((ROOT / 'data/dataset_roles.csv').open(encoding='utf-8-sig')))
+scope = json.loads((ROOT / 'data/resource_review_scope.json').read_text(encoding='utf-8-sig'))
+assert len(resources) == scope['resource_records']
+assert len(datasets) == scope['dataset_families']
+assert len({r['resource'] for r in resources}) == len(resources)
+for resource in resources:
+    assert resource['source_id'] in ids, 'Resource points to missing paper'
+    assert urlsplit(resource['official_resource_url']).scheme == 'https'
+    assert resource['official_resource_url'] in readme, 'Missing official resource link'
+for dataset in datasets:
+    assert set(dataset['source_ids'].split(';')) <= set(ids)
+manifest = json.loads((ROOT / 'assets/review-figures.json').read_text(encoding='utf-8'))
+for figure in manifest:
+    assert set(figure['sources']) <= set(ids)
+    assert (ROOT / 'assets' / figure['filename']).exists()
+for name in ['logo.png', 'review-overview-v2.png', 'fig05-learning-validation.png', 'fig07-benchmarks-datasets.png']:
     asset = (ROOT / 'assets' / name).read_bytes()
     assert asset[:8] == b'\x89PNG\r\n\x1a\n', f'Invalid PNG: {name}'
     assert min(struct.unpack('>II', asset[16:24])) >= 256

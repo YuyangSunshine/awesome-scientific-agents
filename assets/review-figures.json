@@ -1,0 +1,49 @@
+[
+  {
+    "figure": "fig05_learning_validation",
+    "type": "qualitative_editorial_synthesis",
+    "sources": [
+      "M0053",
+      "M0052",
+      "M0062",
+      "M0072",
+      "M0068"
+    ],
+    "editable_source": "original PNG; regenerate with imagegen",
+    "svg_text_editable": false,
+    "design": "Controlled frozen-versus-updated later-study evaluation",
+    "renderer": "imagegen",
+    "native_text_editable": false,
+    "pdf_type": "original raster image embedded in PDF",
+    "filename": "fig05-learning-validation.png",
+    "source_file": "latex_review/figures/fig05_learning_validation.png",
+    "source_snapshot": "2026-10-12",
+    "sha256": "84565f423382e40782c614c5e0dd7814dae465547f4457e6057fe2713555c423"
+  },
+  {
+    "figure": "fig07_benchmarks_datasets",
+    "type": "qualitative_editorial_synthesis",
+    "sources": [
+      "M0077",
+      "M0082",
+      "M0083",
+      "M0075",
+      "M0076",
+      "M0079",
+      "M0057",
+      "M0053",
+      "M0078",
+      "M0084"
+    ],
+    "editable_source": "original PNG; regenerate with imagegen",
+    "svg_text_editable": false,
+    "design": "Evaluation-resource taxonomy and four distinct roles of scientific datasets",
+    "renderer": "imagegen",
+    "native_text_editable": false,
+    "pdf_type": "original raster image embedded in PDF",
+    "filename": "fig07-benchmarks-datasets.png",
+    "source_file": "latex_review/figures/fig07_benchmarks_datasets.png",
+    "source_snapshot": "2026-10-12",
+    "sha256": "a846750d11d4434239872b54b64aecf30ced93ecbfe4fef987e5e74bf5e2aba2"
+  }
+]

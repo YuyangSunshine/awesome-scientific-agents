@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-12",
+  "resource_records": 11,
+  "dataset_families": 4,
+  "counts_basis": "cited paper; not current repository counts",
+  "retrieval": "official public documentation plus local primary fulltexts",
+  "limits": "purposive resource set, no benchmark execution or new performance measurement",
+  "version_sensitive_examples": [
+    "ScienceAgentBench verified split (2026-04-30)",
+    "BixBench v1.0/v1.5 revision (2025-09-23)"
+  ],
+  "ALDE_data": "https://zenodo.org/records/12196802"
+}
