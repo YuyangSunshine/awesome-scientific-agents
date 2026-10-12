@@ -71,7 +71,7 @@ for _, slug, _, _, _ in TOPICS:
     section = readme.split(f'<a id="{slug}"></a>', 1)[1].split('\n---\n', 1)[0]
     years = [int(y) for y in re.findall(r'^### (\d{4})$', section, re.M)]
     assert years == sorted(set(years), reverse=True), f'Incorrect year grouping: {slug}'
-for name in ['logo.png', 'review-overview.png']:
+for name in ['logo.png', 'review-overview-v2.png']:
     asset = (ROOT / 'assets' / name).read_bytes()
     assert asset[:8] == b'\x89PNG\r\n\x1a\n', f'Invalid PNG: {name}'
     assert min(struct.unpack('>II', asset[16:24])) >= 256

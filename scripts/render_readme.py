@@ -77,10 +77,12 @@ This collection brings together research on **scientific agency, verifiable evid
 > 🇨🇳 **为什么建立这个文献库？** 科研智能体与自主实验室正在连接问题提出、假设生成、实验执行与结果分析。我们希望沿着“谁决定科研行动、证据支持什么结论、系统如何获得能力改进”三条主线，把相关论文整理成便于阅读和持续补充的研究地图。
 
 <p align="center">
-  <img src="assets/review-overview.png" alt="Overview: question, hypothesis, experiment, evidence and knowledge, examined through agency, verification and learning" width="100%">
+  <img src="assets/review-overview-v2.png" alt="Review framework: research operations; agency, evidence and learning as cross-cutting analytical axes; separate scientific knowledge and agent capability update pathways; benchmark interpretation" width="100%">
 </p>
 
-*Research automation connects scientific activities. Verifiable discovery requires evidence matched to claims; scientific knowledge updates and demonstrated agent capability gains need separate assessment.*
+*Read the map from research operations to their assessment: three analytical axes apply across the workflow; scientific knowledge revision and agent capability improvement follow distinct update pathways; benchmark interpretation depends on the evaluated unit and construct.*
+
+**How the framework fits together.** Research operations produce questions, protocols, measurements, and conclusions. Agency locates decision authority and verification responsibility; evidence analysis traces each claim to the observations that support it; learning analysis identifies what changed and tests whether the change improved later performance. Knowledge revision can guide the next experiment, while a claim of transferable agent improvement needs a separate controlled comparison. Benchmark scores must be interpreted against the task and unit actually evaluated.
 
 | 🤖 Agency | 🔍 Verification | 🌱 Learning |
 | --- | --- | --- |
