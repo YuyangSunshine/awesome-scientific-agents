@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Please cite the original papers for research claims. Use this entry to cite the collection."
+title: "Awesome Scientific Agents"
+type: software
+authors:
+  - name: "YuyangSunshine"
+repository-code: "https://github.com/YuyangSunshine/awesome-scientific-agents"
+url: "https://github.com/YuyangSunshine/awesome-scientific-agents"
+date-released: "2026-10-12"
+version: "0.1.0"
+license: "CC-BY-4.0"

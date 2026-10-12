@@ -1,0 +1,39 @@
+name: Suggest a paper
+description: Recommend a paper or update a publication record.
+title: '[Paper] '
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Paper title and year
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Primary source URL
+      description: Publisher DOI, official proceedings, or preprint landing page.
+    validations:
+      required: true
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Relevant topics
+      multiple: true
+      options:
+        - Surveys and perspectives
+        - Scientific agents
+        - Autonomous laboratories
+        - Scientific evidence and verification
+        - Active learning and experimental design
+        - Continual learning
+        - Benchmarks and evaluation
+    validations:
+      required: true
+  - type: textarea
+    id: relevance
+    attributes:
+      label: Relevance and version information
+      description: Explain scientific relevance, publication status, supporting official evidence, and related existing IDs or corrections.
+    validations:
+      required: true
