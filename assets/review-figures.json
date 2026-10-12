@@ -1,5 +1,31 @@
 [
   {
+    "figure": "fig01_layered_framework",
+    "type": "qualitative_editorial_synthesis",
+    "sources": [
+      "M0013",
+      "M0046",
+      "M0011",
+      "M0016",
+      "M0028",
+      "M0026",
+      "M0053",
+      "M0027",
+      "M0015",
+      "M0068"
+    ],
+    "editable_source": "original PNG; regenerate with imagegen",
+    "svg_text_editable": false,
+    "design": "Illustrative scientific workflow with actors, tools and three retained evidence objects",
+    "renderer": "imagegen",
+    "native_text_editable": false,
+    "pdf_type": "original raster image embedded in PDF",
+    "filename": "fig01-layered-framework.png",
+    "source_file": "latex_review/figures/fig01_layered_framework.png",
+    "source_snapshot": "2026-10-13",
+    "sha256": "02d1c2e56063261c103dc9336955f161a81ab2daf1aae90cbab48df1cde212e2"
+  },
+  {
     "figure": "fig05_learning_validation",
     "type": "qualitative_editorial_synthesis",
     "sources": [

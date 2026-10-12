@@ -6,6 +6,12 @@ from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+BENCHMARK_CATEGORIES = [
+    ('Component competence', '🧩 Component Competence', '科研组件能力 · Coding, scientific knowledge, and multimodal interpretation.'),
+    ('Research trajectories and replication', '🧭 Research Trajectories and Replication', '科研轨迹与复现 · Data-grounded workflows, hypothesis recovery, and paper replication.'),
+    ('Experimental decisions', '🎯 Experimental Decisions', '实验决策 · Experiment selection and optimization under a resource budget.'),
+    ('Interactive environments', '🌐 Interactive Environments', '交互环境 · Sequential scientific tasks in simulated worlds.'),
+]
 TOPICS = [
     ('ROR', 'surveys', '📚', 'Surveys and Perspectives', 'Start with the broader landscape: scientific discovery, agentic workflows, and self-driving laboratories. This section preserves the original survey collection; topic-specific reviews also appear below.'),
     ('WP1', 'scientific-agents', '🤖', 'AI Scientists and Scientific Agents', 'Systems for research ideation, hypothesis generation, computational experimentation, and coordinated scientific workflows. Read each system in the context of its task, environment, and researcher involvement.'),
@@ -77,10 +83,10 @@ This collection brings together research on **scientific agency, verifiable evid
 > 🇨🇳 **为什么建立这个文献库？** 科研智能体与自主实验室正在连接问题提出、假设生成、实验执行与结果分析。我们希望沿着“谁决定科研行动、证据支持什么结论、系统如何获得能力改进”三条主线，把相关论文整理成便于阅读和持续补充的研究地图。
 
 <p align="center">
-  <img src="assets/review-overview-v2.png" alt="Review framework: research operations; agency, evidence and learning as cross-cutting analytical axes; separate scientific knowledge and agent capability update pathways; benchmark interpretation" width="100%">
+  <img src="assets/fig01-layered-framework.png" alt="Working-review Figure 1: investigation, hypotheses, experiments, validation and later-study benefit, with action records, scientific knowledge and reusable capability retained separately" width="100%">
 </p>
 
-*Read the map from research operations to their assessment: three analytical axes apply across the workflow; scientific knowledge revision and agent capability improvement follow distinct update pathways; benchmark interpretation depends on the evaluated unit and construct.*
+*Figure 1 from the working review. Human researchers, agents, and scientific tools contribute to investigation, hypothesis formation, experimentation, claim validation, and testing later-study benefit. The central archive separates action records, scientific knowledge, and reusable capability. Scenes and screen traces are illustrative; knowledge update does not by itself establish capability improvement.*
 
 **How the framework fits together.** Research operations produce questions, protocols, measurements, and conclusions. Agency locates decision authority and verification responsibility; evidence analysis traces each claim to the observations that support it; learning analysis identifies what changed and tests whether the change improved later performance. Knowledge revision can guide the next experiment, while a claim of transferable agent improvement needs a separate controlled comparison. Benchmark scores must be interpreted against the task and unit actually evaluated.
 
@@ -144,14 +150,21 @@ The expanded resource review organizes evaluation around four families: **compon
 
 The source resource review (2026-10-12) includes **11 resources: nine marked published and two contemporaneous preprints**, plus **four dataset families**. These resources link to papers already in this collection; they do not add 11 new unique publications. [Resource ledger](data/benchmark_resources.csv) · [Dataset roles](data/dataset_roles.csv) · [Review scope](data/resource_review_scope.json).
 
-| Resource | Paper | Official resource | Interpretation boundary |
-| --- | --- | --- | --- |
 '''
             resources = list(csv.DictReader((ROOT / 'data/benchmark_resources.csv').open(encoding='utf-8-sig')))
-            for resource in resources:
-                paper = by_id[resource['source_id']]
-                label = resource['resource'] + (' 📝' if paper['publication_status'] == 'PREPRINT_CONTEMPORANEOUS' else '')
-                md += f"| {label} | [Paper]({url(paper)}) | [Official resource]({resource['official_resource_url']}) | {escape(resource['scientific_boundary'])} |\n"
+            for category, heading, description in BENCHMARK_CATEGORIES:
+                md += f'#### {heading}\n\n{description}\n\n'
+                md += '| Resource | Evaluated task | Paper | Official resource | Interpretation boundary |\n| --- | --- | --- | --- | --- |\n'
+                for resource in resources:
+                    if resource['review_category'] != category:
+                        continue
+                    paper = by_id[resource['source_id']]
+                    label = resource['resource'] + (' 📝' if paper['publication_status'] == 'PREPRINT_CONTEMPORANEOUS' else '')
+                    task = resource['family'].replace(' [preprint]', '')
+                    md += f"| {label} | {escape(task)} | [Paper]({url(paper)}) | [Official resource]({resource['official_resource_url']}) | {escape(resource['scientific_boundary'])} |\n"
+                if category == 'Experimental decisions':
+                    md += '\nMeasured-response companion: [ALDE GB1/TrpB experimental data](https://zenodo.org/records/12196802). These landscapes support historical experiment-selection replay; they are distinct from new wet-lab trials.\n'
+                md += '\n'
             md += '''
 **Version-aware reading.** Keep revised splits, evaluator releases and original paper scales separate. For ScienceAgentBench, retain the verified-split distinction; for PaperBench, distinguish full replication from Code-Dev/code-only evaluation; for BixBench, record the question-set revision. For Olympus and ALDE, distinguish measured landscapes, fitted emulators, historical replay and new wet-lab experiments. Version details are inherited from the source resource ledger; this repository reports no new benchmark execution or performance ranking.
 
@@ -225,11 +238,11 @@ These commands regenerate this single-page README and CSV export. The maintainer
 
 Cite the original paper for a research claim. To cite the collection itself, use [CITATION.cff](CITATION.cff).
 
-The reading-list presentation draws inspiration from [Awesome-Agent-Papers](https://github.com/luo-junyu/Awesome-Agent-Papers), [Awesome-LLM-Scientific-Discovery](https://github.com/HKUST-KnowComp/Awesome-LLM-Scientific-Discovery), and [awesome-llm-agents](https://github.com/kaushikb11/awesome-llm-agents). The introduction, organization around our review questions, logo, and overview illustration were created for this collection.
+The reading-list presentation draws inspiration from [Awesome-Agent-Papers](https://github.com/luo-junyu/Awesome-Agent-Papers), [Awesome-LLM-Scientific-Discovery](https://github.com/HKUST-KnowComp/Awesome-LLM-Scientific-Discovery), and [awesome-llm-agents](https://github.com/kaushikb11/awesome-llm-agents). The introduction, organization around our review questions, and logo were created for this collection.
 
-Original repository content and curation: [CC BY 4.0](LICENSE-CONTENT.md). Maintenance scripts: [MIT](LICENSE). Linked papers retain their original licenses. The two illustrations were generated with OpenAI's built-in image generation tool; the [prompts](assets/prompts.json) document their intended design. The overview is conceptual and reports no experimental findings.
+Original repository content and curation: [CC BY 4.0](LICENSE-CONTENT.md). Maintenance scripts: [MIT](LICENSE). Linked papers retain their original licenses. The logo and earlier repository overview drafts were generated with OpenAI's built-in image generation tool; the [prompts](assets/prompts.json) preserve their design history.
 
-Figures 5 and 7 are reproduced from the working review's existing figure collection. Their [source manifest](assets/review-figures.json) preserves the source-paper anchors, original filenames, and qualitative interpretation. They illustrate evaluation designs and resource constructs rather than report new experimental results.
+Figures 1, 5 and 7 are reproduced from the working review's existing figure collection. Their [source manifest](assets/review-figures.json) preserves the source-paper anchors, original filenames, and qualitative interpretation. They illustrate scientific workflows, evaluation designs and resource constructs rather than report new experimental results.
 
 [↑ Back to contents](#contents)
 '''

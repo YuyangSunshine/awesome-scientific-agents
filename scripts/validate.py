@@ -66,7 +66,7 @@ assert not list((ROOT / 'papers').glob('*.md')), 'Paper lists must live in the h
 for r in records:
     title = r['title'].replace('|', '\\|').replace('[', '\\[').replace(']', '\\]')
     assert f'**{title}**' in readme, f"Missing homepage entry: {r['id']}"
-from render_readme import TOPICS
+from render_readme import BENCHMARK_CATEGORIES, TOPICS
 for _, slug, _, _, _ in TOPICS:
     section = readme.split(f'<a id="{slug}"></a>', 1)[1].split('\n---\n', 1)[0]
     years = [int(y) for y in re.findall(r'^### (\d{4})$', section, re.M)]
@@ -78,6 +78,7 @@ assert len(resources) == scope['resource_records']
 assert len(datasets) == scope['dataset_families']
 assert len({r['resource'] for r in resources}) == len(resources)
 for resource in resources:
+    assert resource['review_category'] in {c[0] for c in BENCHMARK_CATEGORIES}, 'Unclassified benchmark resource'
     assert resource['source_id'] in ids, 'Resource points to missing paper'
     assert urlsplit(resource['official_resource_url']).scheme == 'https'
     assert resource['official_resource_url'] in readme, 'Missing official resource link'
@@ -87,7 +88,7 @@ manifest = json.loads((ROOT / 'assets/review-figures.json').read_text(encoding='
 for figure in manifest:
     assert set(figure['sources']) <= set(ids)
     assert (ROOT / 'assets' / figure['filename']).exists()
-for name in ['logo.png', 'review-overview-v2.png', 'fig05-learning-validation.png', 'fig07-benchmarks-datasets.png']:
+for name in ['logo.png', 'fig01-layered-framework.png', 'fig05-learning-validation.png', 'fig07-benchmarks-datasets.png']:
     asset = (ROOT / 'assets' / name).read_bytes()
     assert asset[:8] == b'\x89PNG\r\n\x1a\n', f'Invalid PNG: {name}'
     assert min(struct.unpack('>II', asset[16:24])) >= 256
