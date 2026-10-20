@@ -4,20 +4,23 @@ Thank you for helping maintain the collection. Recommend papers through the pape
 
 ## Scope and sources
 
-Include work that directly concerns scientific agents, autonomous experimentation, scientific reasoning and verification, experiment design, learning relevant to scientific workflows, or scientific evaluation. Explain the relevance of background methods. General office assistants and chat systems without a scientific task are outside the main scope.
+Include work that directly concerns scientific agents, autonomous experimentation, scientific reasoning and verification, experience reuse, or scientific evaluation and infrastructure. Explain the relevance of background methods. General office assistants and chat systems without a scientific task are outside the main scope.
 
 Provide a primary source: publisher DOI, official conference proceedings, or a recognized preprint landing page. Add code and datasets only when verified as associated with the work; the current schema does not store unverified project URLs. Use a separate issue to propose such schema extensions.
 
 ## Add or update a record
 
 1. Check for an existing title, DOI or arXiv ID in `data/papers.json`. Keep its stable ID for a version update. Allocate the next unused `Mxxxx` ID for a new work.
-2. Fill the existing schema: title, authors, year, venue, type, domain, DOI and landing page, publication status and evidence, metadata source, topic membership, and source PDF version/access. Put multiple topic IDs in `wp_membership`, separated by `;`.
-3. Verify published or accepted status against an official source. An unverified acceptance claim remains `PUBLICATION_PENDING_VERIFICATION`; an unaccepted preprint uses `PREPRINT_CONTEMPORANEOUS`. Publication status and claim validity are separate facts.
-4. Link versions of the same work within a record; keep genuine follow-up studies and corrections separate. Mention related IDs in the PR. Read A-Lab `M0026` with correction `M0027`.
-5. Add or update the matching `references.bib` entry with the same ID. Do not add local file paths or article binaries. Use source landing pages for access.
-6. Run `python scripts/build_catalog.py` and `python scripts/validate.py`. Commit the updated README and CSV. All paper lists are generated directly in the homepage; update `scripts/render_readme.py` when changing shared prose. Keep lists organized by topic and year, with newest years first; public entries show titles, venues, and paper links.
+2. Fill the bibliographic and provenance fields: title, authors, year, venue, type, domain, DOI and landing page, publication status and evidence, metadata source, and source PDF version/access.
+3. Assign exactly one `main_section`: `Surveys and Perspectives`, `Scientific Agents and Systems`, or `Evaluation and Research Infrastructure`.
+4. For `Scientific Agents and Systems`, assign exactly one `primary_function`: `Action Planning`, `Observation Acquisition`, `Claim Assessment`, or `Experience Reuse`. Leave `primary_function` empty for the other two main sections.
+5. Put every supported functional contribution in the JSON array `function_contributions`. A systems record must include its primary function; additional functions are optional and not capped. Keep `legacy_wp_membership` unchanged for migrated records.
+6. Verify published or accepted status against an official source. An unverified acceptance claim remains `PUBLICATION_PENDING_VERIFICATION`; an unaccepted preprint uses `PREPRINT_CONTEMPORANEOUS`. Publication status and claim validity are separate facts.
+7. Keep genuine follow-up studies and corrections separate. Name corrections `Author Correction: <original title>` so the renderer can attach them beneath the original article.
+8. Add or update the matching `references.bib` entry with the same ID. Do not add local file paths or article binaries. Use source landing pages for access.
+9. Run `python scripts/build_catalog.py` and `python scripts/validate.py`. Commit the updated README and CSV. All paper lists are generated directly in the homepage; update `scripts/render_readme.py` when changing shared prose. Keep lists organized by category and year, with newest years first.
 
-`source_fulltext_available` records access in the source library, not whether a visitor can download a paper. For community additions without a source-library copy, use `false` and `pdf_version: "unavailable"`. Snapshot counts describe the initial import; current catalog counts in the README are regenerated. Stable IDs are used internally for data and BibTeX matching, not displayed in the reading lists.
+`source_fulltext_available` records access in the source library, not whether a visitor can download a paper. For community additions without a source-library copy, use `false` and `pdf_version: "unavailable"`. Stable IDs are used internally for data and BibTeX matching, not displayed in the reading lists.
 
 ## Evidence notes and errors
 
