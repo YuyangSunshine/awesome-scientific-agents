@@ -88,7 +88,7 @@ manifest = json.loads((ROOT / 'assets/review-figures.json').read_text(encoding='
 for figure in manifest:
     assert set(figure['sources']) <= set(ids)
     assert (ROOT / 'assets' / figure['filename']).exists()
-for name in ['logo.png', 'fig01-layered-framework.png', 'fig05-learning-validation.png', 'fig07-benchmarks-datasets.png']:
+for name in ['logo.png', 'core_framework.png', 'fig05-learning-validation.png', 'fig07-benchmarks-datasets.png']:
     asset = (ROOT / 'assets' / name).read_bytes()
     assert asset[:8] == b'\x89PNG\r\n\x1a\n', f'Invalid PNG: {name}'
     assert min(struct.unpack('>II', asset[16:24])) >= 256
