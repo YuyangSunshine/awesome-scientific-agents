@@ -16,20 +16,38 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: topic
+    id: main_section
     attributes:
-      label: Relevant topics
-      multiple: true
+      label: Main section
       options:
-        - Surveys and perspectives
-        - Scientific agents
-        - Autonomous laboratories
-        - Scientific evidence and verification
-        - Active learning and experimental design
-        - Continual learning
-        - Benchmarks and evaluation
+        - Surveys and Perspectives
+        - Scientific Agents and Systems
+        - Evaluation and Research Infrastructure
     validations:
       required: true
+  - type: dropdown
+    id: primary_function
+    attributes:
+      label: Primary function for a scientific system
+      description: Select Not applicable unless the main section is Scientific Agents and Systems.
+      options:
+        - Not applicable
+        - Action Planning
+        - Observation Acquisition
+        - Claim Assessment
+        - Experience Reuse
+    validations:
+      required: true
+  - type: checkboxes
+    id: function_contributions
+    attributes:
+      label: Other functional contributions
+      description: Select every additional function supported by the paper; there is no maximum.
+      options:
+        - label: Action Planning
+        - label: Observation Acquisition
+        - label: Claim Assessment
+        - label: Experience Reuse
   - type: textarea
     id: relevance
     attributes:
