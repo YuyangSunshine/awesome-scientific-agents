@@ -230,10 +230,6 @@ This collection brings together research on **scientific agency, verifiable evid
 | --- | --- | --- |
 | Who proposes, selects, authorizes, and accepts scientific decisions? | What observation supports the claim, and how is it checked? | What changes, over what time scale, and does it improve later scientific tasks? |
 
-**How the catalog is organized.** The three top-level sections are mutually exclusive. Scientific agents and systems appear once under their primary functional stage; emojis preserve additional functional contributions without duplicating the paper across subsections.
-
-> 🇨🇳 **分类说明：** 三个大类互不重叠；科研智能体与系统按照最主要的贡献归入一个具体环节。标题后的 emoji 表示它还覆盖的其他科研功能，而不是重复收录。
-
 ### Functional contribution legend
 
 | Emoji | Function | Scope |
