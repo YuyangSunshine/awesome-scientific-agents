@@ -608,11 +608,11 @@
     "publication_status": "PUBLISHED_VERIFIED",
     "publication_evidence": "https://doi.org/10.1038/s41586-023-06734-w",
     "main_section": "Scientific Agents and Systems",
-    "primary_function": "Claim Assessment",
+    "primary_function": "Observation Acquisition",
     "function_contributions": [
-      "Claim Assessment",
       "Observation Acquisition",
-      "Action Planning"
+      "Action Planning",
+      "Claim Assessment"
     ],
     "legacy_wp_membership": "WP2;WP3",
     "pdf_version": "published_article",
@@ -1035,10 +1035,10 @@
     "publication_status": "PUBLISHED_VERIFIED",
     "publication_evidence": "https://doi.org/10.1038/s41586-023-06924-6",
     "main_section": "Scientific Agents and Systems",
-    "primary_function": "Claim Assessment",
+    "primary_function": "Action Planning",
     "function_contributions": [
-      "Claim Assessment",
       "Action Planning",
+      "Claim Assessment",
       "Observation Acquisition"
     ],
     "legacy_wp_membership": "WP3;WP5",
@@ -1594,10 +1594,10 @@
     "publication_status": "PREPRINT_CONTEMPORANEOUS",
     "publication_evidence": "",
     "main_section": "Scientific Agents and Systems",
-    "primary_function": "Claim Assessment",
+    "primary_function": "Action Planning",
     "function_contributions": [
-      "Claim Assessment",
       "Action Planning",
+      "Claim Assessment",
       "Observation Acquisition"
     ],
     "legacy_wp_membership": "WP5",
